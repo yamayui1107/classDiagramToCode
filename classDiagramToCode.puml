@@ -1,0 +1,16 @@
+@startuml umlToCode
+package Creator{
+    interface TestInter{
+        void testMethod()
+    }
+
+    abstract class TestAbs{
+        -TestClass testClass = new TestClass();
+        +TestClass getTestClass()
+
+        +void setTestClass(TestClass testClass)
+    }
+}
+
+
+@enduml
