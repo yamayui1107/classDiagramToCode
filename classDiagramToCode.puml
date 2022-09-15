@@ -1,14 +1,89 @@
 @startuml umlToCode
+
+package classOutput{
+    class JavaOutput{
+        -File outputFolder
+        -List<PackageCreator> packageCreatorList
+        +void output()
+    }
+}
+
 package Creator{
-    interface TestInter{
-        void testMethod()
+    Class Creator{
+        +String create()
     }
 
-    abstract class TestAbs{
-        -TestClass testClass = new TestClass();
-        +TestClass getTestClass()
+}
+package javaCreator{
+    Enum AccessModifier{
+        PUBLIC
+        DEFAULT
+        PROTECTED
+        PRIVATE
+    }
+    Enum ClassType{
+        CLASS
+        ABSTRACT_CLASS
+        INTERFACE
+        ENUM
+    }
+    Enum PrimitiveType{
+        BOOLEAN
+        CHAR
+        INT
+        LONG
+        FLOAT
+        DOUBLE
+    }
 
-        +void setTestClass(TestClass testClass)
+    class PackageCreator implements Creator{
+        -String packageName
+        -ClassCreator classCreator
+        +String create()
+        +String getPackageName()
+        +String getClassFileName()
+    }
+    class ClassCreator implements Creator{
+        -AccessModifier accessModifier
+        -ClassType classType
+        -String className
+        -String extendsClassName
+        -List<String> implementsInterfaceNameList
+        -List<FieldCreator> fieldCreatorList
+        -List<MethodCreator> methodCreatorList
+        +String create()
+        +String getClassName()
+    }
+    class FieldCreator implements Creator{
+        -AccessModifier accessModifier
+        -String typeName
+        -String memberName
+        -String implementedTypeName
+        +String create()
+    }
+
+    class MethodCreator implements Creator{
+        -AccessModifier accessModifier
+        -String returnTypeName
+        -String methodName
+        -List<String> argumentList
+        +String create()
+    }
+
+    JavaOutput o- PackageCreator
+    PackageCreator o- ClassCreator
+    ClassCreator o- AccessModifier
+    ClassCreator o- ClassType
+    ClassCreator o- FieldCreator
+    ClassCreator o- MethodCreator
+    FieldCreator o- AccessModifier
+    MethodCreator o- AccessModifier
+}
+
+package parser{
+    class JavaParser{
+        -File inputUmlFile
+        +List<PackageCreator> parse()
     }
 }
 

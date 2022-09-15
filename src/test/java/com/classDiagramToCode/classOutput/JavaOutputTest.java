@@ -19,7 +19,8 @@ class JavaOutputTest {
 
         List<PackageCreator> packageCreatorList = javaParser.parse();
 
-        JavaOutput.output(outputFolder,packageCreatorList);
+        JavaOutput javaOutput = new JavaOutput(outputFolder, packageCreatorList);
+        javaOutput.output();
 
     }
 }

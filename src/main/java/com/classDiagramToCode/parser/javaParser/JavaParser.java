@@ -15,20 +15,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JavaParser implements Parser {
-    private File inputFile;
+    private File inputUmlFile;
     private final Logger logger = Logger.getLogger("createLog");
 
-    public JavaParser(File inputFile){
-        this.inputFile = inputFile;
+    public JavaParser(File inputUmlFile){
+        this.inputUmlFile = inputUmlFile;
     }
 
     public List<PackageCreator> parse() {
-        if (inputFile == null){
+        if (inputUmlFile == null){
             return null;
         }
-        logger.log(Level.INFO, "インプットファイル名 : " + inputFile.toString() );
+        logger.log(Level.INFO, "インプットファイル名 : " + inputUmlFile.toString() );
 
-        String fileContents = readAll(inputFile);
+        String fileContents = readAll(inputUmlFile);
 
         List<String> packageContents = searchCreator(fileContents,"package");
         List<PackageCreator> packageCreatorList = new ArrayList<>();

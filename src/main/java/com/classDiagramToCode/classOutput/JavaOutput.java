@@ -9,10 +9,18 @@ import java.util.List;
 
 public class JavaOutput {
 
-    public static void output(File outputFilePath, List<PackageCreator> packageCreatorList){
+    private File outputFolder;
+    private List<PackageCreator> packageCreatorList;
+
+    public JavaOutput(File outputFile, List<PackageCreator> packageCreatorList){
+        this.outputFolder = outputFile;
+        this.packageCreatorList = packageCreatorList;
+    }
+
+    public void output(){
         for (PackageCreator packageCreator : packageCreatorList){
 
-            File packageFile = new File(outputFilePath + File.separator +packageCreator.getPackageName());
+            File packageFile = new File(outputFolder + File.separator + packageCreator.getPackageName());
 
             //パッケージファイル作成
             if (!packageFile.exists()) {

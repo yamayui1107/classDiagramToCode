@@ -20,6 +20,7 @@ public class Main {
         List<PackageCreator> packageCreatorList = javaParser.parse();
 
         //出力先のフォルダーに出力
-        JavaOutput.output(outputFolder,packageCreatorList);
+        JavaOutput javaOutput = new JavaOutput(outputFolder, packageCreatorList);
+        javaOutput.output();
     }
 }
